@@ -1,1 +1,3 @@
-# mlops-zoomcamp-2025
+# MLOPs Zoomcamp
+
+Repository with solutions for MLOPS Zoomcamp 2025
