@@ -18,4 +18,4 @@ services:
       - mlflow
     volumes:
       - ./models:/app/models
-    command: ["python", "pipeline.py", "--year", "2023", "--month", "3"]
+    entrypoint: ["python", "pipeline.py"]
