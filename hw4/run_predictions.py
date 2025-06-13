@@ -1,5 +1,5 @@
 import click 
-from starter import create_predictions
+from score import generate_predictions
 
 
 @click.command()
@@ -7,7 +7,7 @@ from starter import create_predictions
 @click.option('--month', required=True, type=int, help='Month to generate predictions for')
 def main(year, month):
     """CLI for generating predictions."""
-    create_predictions(year, month)
+    generate_predictions(year, month)
 
 if __name__ == '__main__':
     main()
