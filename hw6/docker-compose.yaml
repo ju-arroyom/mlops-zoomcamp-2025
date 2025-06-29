@@ -1,0 +1,29 @@
+
+services:  
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566" # Default LocalStack edge port
+    environment:
+      - SERVICES=s3 # Specify S3 as a service to enable
+      - HOSTNAME=localstack
+      - DEFAULT_REGION=us-east-1 # Set a default AWS region
+    networks:
+      - test-net
+  backend:
+    image: ${LOCAL_IMAGE_NAME}
+    environment:
+      - INPUT_FILE_PATTERN=${INPUT_FILE_PATTERN}
+      - OUTPUT_FILE_PATTERN=${OUTPUT_FILE_PATTERN}
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    depends_on:
+      - localstack
+    networks:
+      - test-net
+
+networks:
+  test-net:
+    driver: bridge # Use a bridge network
