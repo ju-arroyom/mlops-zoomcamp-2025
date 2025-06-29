@@ -29,6 +29,13 @@ sleep 1
 echo "Creating Dataset for ${YEAR}-0${MONTH}"
 python integration_test.py $YEAR $MONTH
 
+# Check size of input file
+echo "Reviewing file was added"
+aws --endpoint-url=http://localhost:4566 s3 ls $BUCKET --recursive
+
+# Wait a little bit
+sleep 1
+
 # Run batch.py inside container
 echo "Running Prediction with batch.py"
 docker-compose run backend $YEAR $MONTH
